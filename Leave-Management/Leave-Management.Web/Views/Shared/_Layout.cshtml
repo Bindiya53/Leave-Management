@@ -30,7 +30,7 @@
                             <a class="nav-link text-white" asp-area="" asp-controller="LeaveRequests" asp-action="Create">Apply For Leave</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="" asp-action=""> My Leave</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="LeaveRequests" asp-action="MyLeave"> My Leave</a>
                         </li>
                         @if(User.IsInRole("Administrator"))
                         {
@@ -44,16 +44,10 @@
                                     <ul class="dropdown-menu">
                                     <li class="nav-item">
                                         <a class="dropdown-item" asp-controller="LeaveType" asp-action="Index">Leave Types </a>
-                                    </li> 
-                                    <li class="nav-item">
-                                        <a class="dropdown-item"  href="#" >Leave Allocations</a>
                                     </li>    
                                     <li class="nav-item">
-                                        <a class="dropdown-item" href="#">Leave Requests</a>
+                                        <a class="dropdown-item" asp-controller="LeaveRequests" asp-action="Index">Leave Requests</a>
                                     </li>                        
-                                    <li class="nav-item">
-                                        <a class="dropdown-item" href="#">Employee Management</a>
-                                    </li>
                                     </ul>
                             </li>
                         }

@@ -1,4 +1,5 @@
-﻿using Leave_Management.Web.Contracts;
+﻿using Leave_Management.Web.Constants;
+using Leave_Management.Web.Contracts;
 using Leave_Management.Web.Data;
 using Leave_Management.Web.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -21,35 +22,31 @@ namespace Leave_Management.Leave_Management.Leave_Management.Web.Controllers
             _leaveRequestRepo = leaveRequestRepo;
         }
 
+
+        [Authorize(Roles = Roles.Administrator )]
         // GET: LeaveRequests
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.LeaveRequests.Include(x => x.LeaveType);
-            return View(await _context.LeaveRequests.ToListAsync());
+            var model =await  _leaveRequestRepo.GetAdminLeaveRequestList();
+            return View(model);
         }
 
-        public async Task<IActionResult> MyLeave()
+        public async Task<ActionResult> MyLeave()
         {
-            return View();
+            var model =await  _leaveRequestRepo.GetMyLeaveDetails();
+            return View(model);
         }
 
 
         // GET: LeaveRequests/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.LeaveRequests == null)
+            var model  = await _leaveRequestRepo.GetLeaveRequestAsync(id);
+            if(model == null)
             {
                 return NotFound();
             }
-
-            var leaveRequest = await _context.LeaveRequests
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (leaveRequest == null)
-            {
-                return NotFound();
-            }
-
-            return View(leaveRequest);
+            return View(model);
         }
 
         // GET: LeaveRequests/Create
@@ -60,6 +57,21 @@ namespace Leave_Management.Leave_Management.Leave_Management.Web.Controllers
                LeaveType =  new SelectList(_context.LeaveTypes,"Id", "Name")
             };
             return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ApproveRequest(int id, bool approve)
+        {
+            try
+            {
+               await  _leaveRequestRepo.ChangeApprovalStatus(id, approve);
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: LeaveRequests/Create
