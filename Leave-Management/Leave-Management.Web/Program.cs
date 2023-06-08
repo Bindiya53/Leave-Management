@@ -1,13 +1,12 @@
-using System.Collections.Immutable;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Leave_Management.Web.Data;
-using AutoMapper;
 using Leave_Management.Web.Configurations;
 using Leave_Management.Web.Contracts;
 using Leave_Management.Web.Repositories;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Leave_Management.Leave_Management.Web.Configurations;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -38,12 +37,17 @@ builder.Services.AddAutoMapper(typeof(MapperConfig));
 builder.Services.AddScoped<IEmailSender, EmailSender>(); 
 builder.Services.AddHttpContextAccessor();
 
+builder.Host.UseSerilog((ctx, lc) => 
+    lc.WriteTo.Console()
+    .ReadFrom.Configuration(ctx.Configuration));
+
 builder.Services.AddMvc();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
+app.UseSerilogRequestLogging();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Leave_Management.Web.Contracts;
 using Leave_Management.Web.Data;
 using Microsoft.EntityFrameworkCore;

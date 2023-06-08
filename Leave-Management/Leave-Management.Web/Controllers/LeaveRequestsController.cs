@@ -61,17 +61,32 @@ namespace Leave_Management.Leave_Management.Leave_Management.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ApproveRequest(int id, bool approve)
+        public async Task<IActionResult> ApproveRequest(int id, bool approved)
         {
             try
             {
-               await  _leaveRequestRepo.ChangeApprovalStatus(id, approve);
+               await  _leaveRequestRepo.ChangeApprovalStatus(id, approved);
             }
             catch(Exception ex)
             {
                 throw;
             }
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Cancel(int id)
+        {
+            try
+            {
+               await  _leaveRequestRepo.CancelLeaveRequest(id);
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+            return RedirectToAction(nameof(MyLeave));
         }
 
         // POST: LeaveRequests/Create
@@ -85,14 +100,17 @@ namespace Leave_Management.Leave_Management.Leave_Management.Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    // var leaveRequest =_context.Add(model);
-                    await _leaveRequestRepo.CreateLeaveRequest(model);
-                    return RedirectToAction(nameof(Index));
+                    var isValidRequest = await _leaveRequestRepo.CreateLeaveRequest(model);
+                    if(isValidRequest)
+                    {
+                        return RedirectToAction(nameof(MyLeave));
+                    }
+                    ModelState.AddModelError(string.Empty, "You've exceeded allocation with this request.");
                 }
             }
             catch(Exception ex)
             {
-                ModelState.AddModelError(string.Empty, "An Error has occured, please try later");
+                ModelState.AddModelError(string.Empty, "An Error has occurred, please try later");
             }
             model.LeaveType = new SelectList(_context.LeaveTypes,"Id", "Name", model.LeaveTypeId);
             return View(model);

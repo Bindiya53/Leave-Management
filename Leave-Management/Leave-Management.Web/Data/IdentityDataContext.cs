@@ -16,6 +16,19 @@ public class IdentityDataContext : IdentityDbContext<IdentityUser>
     public DbSet<LeaveAllocation> LeaveAllocations { get; set; }
     public DbSet<LeaveRequest> LeaveRequests{get; set;}
 
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        foreach(var entry in base.ChangeTracker.Entries<BaseEntity>().Where(x => x.State == EntityState.Added || x.State == EntityState.Modified))
+        {
+            entry.Entity.DateModified = DateTime.Now;
+            if(entry.State == EntityState.Added)
+            {
+                entry.Entity.DateCreated =  DateTime.Now;
+            }
+        }
+        return base.SaveChangesAsync(cancellationToken);
+    }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);

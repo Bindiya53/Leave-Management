@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 
-namespace  Leave_Management.Web.Data
+namespace Leave_Management.Web.Data
 {
     public class Employee : IdentityUser
     {

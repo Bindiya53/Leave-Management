@@ -542,3 +542,16 @@ C:\Leave-Management\Leave-Management\Leave-Management.Web\obj\Debug\net6.0\refin
 C:\Leave-Management\Leave-Management\Leave-Management.Web\obj\Debug\net6.0\Leave-Management.Web.pdb
 C:\Leave-Management\Leave-Management\Leave-Management.Web\obj\Debug\net6.0\Leave-Management.Web.genruntimeconfig.cache
 C:\Leave-Management\Leave-Management\Leave-Management.Web\obj\Debug\net6.0\ref\Leave-Management.Web.dll
+c:\Leave-Management\Leave-Management\Leave-Management.Web\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+c:\Leave-Management\Leave-Management\Leave-Management.Web\bin\Debug\net6.0\Serilog.dll
+c:\Leave-Management\Leave-Management\Leave-Management.Web\bin\Debug\net6.0\Serilog.AspNetCore.dll
+c:\Leave-Management\Leave-Management\Leave-Management.Web\bin\Debug\net6.0\Serilog.Expressions.dll
+c:\Leave-Management\Leave-Management\Leave-Management.Web\bin\Debug\net6.0\Serilog.Extensions.Hosting.dll
+c:\Leave-Management\Leave-Management\Leave-Management.Web\bin\Debug\net6.0\Serilog.Extensions.Logging.dll
+c:\Leave-Management\Leave-Management\Leave-Management.Web\bin\Debug\net6.0\Serilog.Formatting.Compact.dll
+c:\Leave-Management\Leave-Management\Leave-Management.Web\bin\Debug\net6.0\Serilog.Settings.Configuration.dll
+c:\Leave-Management\Leave-Management\Leave-Management.Web\bin\Debug\net6.0\Serilog.Sinks.Console.dll
+c:\Leave-Management\Leave-Management\Leave-Management.Web\bin\Debug\net6.0\Serilog.Sinks.Debug.dll
+c:\Leave-Management\Leave-Management\Leave-Management.Web\bin\Debug\net6.0\Serilog.Sinks.File.dll
+c:\Leave-Management\Leave-Management\Leave-Management.Web\bin\Debug\net6.0\Serilog.Sinks.PeriodicBatching.dll
+c:\Leave-Management\Leave-Management\Leave-Management.Web\bin\Debug\net6.0\Serilog.Sinks.Seq.dll

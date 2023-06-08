@@ -4,20 +4,20 @@
     ViewData["Title"] = "Leave Request Details";
     string className;
     string headingText;
-    if(@Model.Approved == null)
+    if(Model.Approved == null)
     {
         headingText = "Pending Approval";
-        className = "Warning";
+        className = "warning";
     }
-    else if(@Model.Approved == true)
+    else if(Model.Approved == true)
     {
         headingText = "Approved";
-        className = "Success";
+        className = "success";
     }
     else
     {
         headingText = "Rejected";
-        className = "Danger";
+        className = "danger";
     }
 }
 
@@ -64,12 +64,17 @@
     </dl>
 </div>
 <div>
-    @if(@Model.Approved == null)
+    @if(Model.Approved == null)
     {
         <form asp-action="ApproveRequest">
-            <input asp-for="Id" type="hidden">
-            <button type="submit" asp-route-approved = "true" class = "btn btn-success">Approve</button>
-            <button type="submit" asp-route-approved = "false" class = "btn btn-danger">Reject</button>
+            <input name="Id" value="@Model.Id" type="hidden">
+            <input name="approved" type="hidden"  value="true">
+            <button type="submit" class = "btn btn-success">Approve</button>
+        </form>
+        <form asp-action="ApproveRequest">
+            <input name="Id" value="@Model.Id" type="hidden">
+            <input name="approved" type="hidden" value="false">
+            <button type="submit" class = "btn btn-danger">Reject</button>
         </form>
     }
     <a class = "btn btn-dark" asp-action="Index">Back to List</a>
